@@ -17,3 +17,63 @@
     <div class="right-button"> > </div>
   </div>
 */
+
+//Image Array
+const images = [
+  './assets/carousel/mountains.jpeg',
+  './assets/carousel/computer.jpeg',
+  './assets/carousel/trees.jpeg',
+  './assets/carousel/turntable.jpeg'
+]
+//Starting Index
+var index = 0;
+//Parent Div
+const carouselContainer = document.querySelector('.carousel-container');
+//Image Element
+const caroImg = document.createElement('img');
+
+//Image creation function
+function imageCreator() {
+  caroImg.src = images[index];
+}
+//Call to creation function
+imageCreator();
+//Carousel function
+function Carousel() {
+  //carousel div
+  const carousel = document.createElement('div');
+  carousel.classList.add('carousel');
+  carouselContainer.appendChild(carousel);
+  //Left carousel Button
+  const leftButton = document.createElement('div');
+  leftButton.classList.add('left-button');
+  leftButton.textContent = '<';
+  carousel.appendChild(leftButton);
+  //Left button event listener
+  leftButton.addEventListener('click', () => {
+    if (index > 0){
+      index--;
+    } else {
+      index = images.length - 1;
+    }
+    imageCreator();
+  })
+  //Right Carousel button
+  const rightButton = document.createElement('div');
+  rightButton.classList.add('right-button');
+  rightButton.textContent = '>';
+  carousel.appendChild(rightButton);
+  //Right Button event listener
+  rightButton.addEventListener('click', () => {
+    if (index < images.length -1){
+      index++;
+    } else {
+      index = 0;
+    }
+    imageCreator();
+  })
+  //Image Append
+  carousel.appendChild(caroImg);
+}
+
+Carousel();
